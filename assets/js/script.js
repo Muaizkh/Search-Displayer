@@ -17,9 +17,17 @@ let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
 // This function renders the search history on the page itself
 function renderHistory() {
     // clear current history
+    var recentSearchHistory = []
+    function searchFunction(data) {
+        recentSearchHistory.push($("search-history").val());
+        $("#search").val('');
+    $("#search-history").val('');
+    }
         // if any history objects are disabled, do not delete them
     console.log (renderHistory);
     // load the history onto the page using a foreach
+
+    
     // created a variable for search history and added an area to append the history
     var searchHistroy = document.createElement ('p');
     searchHistroy.classList.add ('card-body');
