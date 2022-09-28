@@ -8,6 +8,7 @@ let localStorageKey = "google-wiki-search-history";
 function renderHistory() {
     console.log (renderHistory);
     // load the history onto the page using a foreach
+    
     // created a variable for search history and added an area to append the history
     var searchHistroy = document.createElement ('p');
     searchHistroy.classList.add ('card-body');
