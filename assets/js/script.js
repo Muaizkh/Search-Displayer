@@ -145,8 +145,6 @@ function getSearchResults(query) {
     waitUntilFinished();
 }
 
-getSearchResults("Cats");
-
 // this function displays the results we got, formatted into a array
 function displaySearchResults(results) {
     results.forEach(element => {
