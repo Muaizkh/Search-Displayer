@@ -1,4 +1,8 @@
 // Import any elements we ened
+let historySelector = $("#history-selector");
+let searchButton = $("#search-btn");
+let resultsList = $("#results-list");
+
 let historyCache = [];
 let localStorageKey = "google-wiki-search-history";
 
@@ -7,7 +11,7 @@ let googleCXKey = "630c7fb54684c4849";
 let googleAPIURL = "https://www.googleapis.com/customsearch/v1?cx="+googleCXKey+"&";
 let wikiAPIURL = "https://en.wikipedia.org/w/api.php?action=opensearch&&origin=*&";
 
-let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4'
+let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
 
 var userSearch = document.querySelector('#search-input');
 
@@ -15,9 +19,17 @@ var userSearch = document.querySelector('#search-input');
 // This function renders the search history on the page itself
 function renderHistory() {
     // clear current history
+    var recentSearchHistory = []
+    function searchFunction(data) {
+        recentSearchHistory.push($("search-history").val());
+        $("#search").val('');
+    $("#search-history").val('');
+    }
         // if any history objects are disabled, do not delete them
     console.log (renderHistory);
     // load the history onto the page using a foreach
+
+    
     // created a variable for search history and added an area to append the history
     var searchHistroy = document.createElement ('p');
     searchHistroy.classList.add ('card-body');
@@ -109,8 +121,6 @@ function getSearchResults(query) {
     waitUntilFinished();
 }
 
-getSearchResults("Cats");
-
 // this function displays the results we got, formatted into a array
 function displaySearchResults(results) {
     // loop through all results
@@ -158,7 +168,10 @@ function resultsButtonClicked(event) {
 
 
 // listen for click event on search button then pass to searchClicked
+searchButton.on("click", searchClicked);
 
-// listen for click event on history buttons then pass to historyButtonClicked
+// listen for change event on history buttons then pass to historyButtonClicked
+historySelector.on("change", historyButtonClicked);
 
-// listen for change event on searchResultButtons then pass to resultsButtonClicked
+// listen for click event on searchResultButtons then pass to resultsButtonClicked
+resultsList.on("click", ".result-link-button", resultsButtonClicked);

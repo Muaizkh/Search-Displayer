@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="./assets/css/reset.css"/>
     <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <!--1. Create header to hold title of landing page
         2. Setup same level container for User Search & Search button/selector for formats
         3.Create container for all results containers that are held in it
@@ -20,16 +21,24 @@
 </header>
 <body>
     <main>
+<<<<<<< HEAD
         <section class="search-history dropdown is-active">
             <select>
             <option value="" disabled selected=>Select</option>
         </select>
+=======
+        <section id="search-history">
+             <select id="history-selector">
+                <option class="history-option" value="" disabled selected=>Select</option>
+            </select>
+>>>>>>> 427ad6291b2e99707518a8081c6819a9c0fbfd6d
         </section>
 
 
         <section class="search-container container is-max-desktop">
             <div id="search" class="notification is-primary">
                 <!-- <h2></h2> -->
+<<<<<<< HEAD
                 <input id="search-input" type="text" placeholder="Search">
             <button id="btn" class="button is-link">submit</button>
             
@@ -42,6 +51,10 @@
                 <option value="articles">Articles</option>
                 <option value="manuscripts">Manuscripts</option>
             </select>
+=======
+                <input type="text" placeholder="Search">
+            <button id="btn" onclick="searchFunction()">Search</button>
+>>>>>>> 427ad6291b2e99707518a8081c6819a9c0fbfd6d
             </div>
         </section>
         
@@ -51,6 +64,8 @@
             </ul>
         </section>
     </main>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 <footer>
