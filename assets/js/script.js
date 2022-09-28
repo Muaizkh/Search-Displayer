@@ -2,10 +2,19 @@
 let historyCache = [];
 let localStorageKey = "google-wiki-search-history";
 
+let googleCXKey = "630c7fb54684c4849";
+
+let googleAPIURL = "https://www.googleapis.com/customsearch/v1?cx="+googleCXKey+"&";
+let wikiAPIURL = "https://en.wikipedia.org/w/api.php?action=opensearch&&origin=*&";
+
+let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4'
 
 //// History Handling ////
 // This function renders the search history on the page itself
 function renderHistory() {
+    // clear current history
+        // if any history objects are disabled, do not delete them
+
     // load the history onto the page using a foreach
 }
 
@@ -32,23 +41,69 @@ function saveHistory(query) {
 
 
 //// Search result handling ////
+function createSearchResultObject(Title, Link, Description) {
+    return {
+        Title:Title,
+        Link: Link,
+        Description: Description
+    }
+}
 
 // This function gets the search results for our query term from the google and wikipidea apis
 function getSearchResults(query) {
     let searchResults = [];
+    let googleFinished = false;
+    let wikiFinished = false;
 
     // prep url for querying google
+    let googleURL = googleAPIURL+"key="+googleAPIKey+"&q="+query;
 
     // prep url for querying wikipedia
+    let wikiURL = wikiAPIURL+"search="+query;
 
     // fetch google url
-        // .then parse recieved data to searchResults
+    // .then parse recieved data to searchResults
+    fetch(googleURL)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(body){
+            console.log(body);
+            body.items.forEach(element => {
+                searchResults.push(createSearchResultObject(element.title, element.link, element.htmlSnippet));
+            });
+
+            googleFinished = true;
+        })
 
     // fetch wikipedia url
-        // .then parse recieved data to searchResults
+    // .then parse recieved data to searchResults
+    fetch(wikiURL)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(body){
+            console.log(body);
+            for (const index in body[1]) {
+                searchResults.push(createSearchResultObject(body[1][index], body[3][index], body[2][index]));
+            }
 
-    displaySearchResults(searchResults);
+            wikiFinished = true;
+        })
+
+        // This waits until both requests are finished
+        function waitUntilFinished() {
+            if (googleFinished && wikiFinished) {
+                console.log(searchResults)
+                displaySearchResults(searchResults);
+            } else {
+                window.setTimeout(waitUntilFinished, 100);
+            }
+        }
+    waitUntilFinished();
 }
+
+getSearchResults("Cats");
 
 // this function displays the results we got, formatted into a array
 function displaySearchResults(results) {
