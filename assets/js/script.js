@@ -2,7 +2,7 @@
 let historySelector = $("#history-selector");
 let searchButton = $("#search-btn");
 let resultsList = $("#results-list");
-var searchInput =$('#search-input');
+var searchInput = $('#search-input');
 
 
 let historyCache = [];
@@ -13,11 +13,18 @@ let googleCXKey = "630c7fb54684c4849";
 let googleAPIURL = "https://www.googleapis.com/customsearch/v1?cx="+googleCXKey+"&";
 let wikiAPIURL = "https://en.wikipedia.org/w/api.php?action=opensearch&&origin=*&";
 
-let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
+let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4'
 
 //// History Handling ////
 // This function renders the search history on the page itself
+// setting up local storage for search history so it has a place to be stored
 function renderHistory() {
+    localStorage.setItem("searchHistory",JSON.stringify(searchHistory));
+    if(!searchHistory) {
+        searchHistory = {
+            history:[]
+        };
+    }
     // clear current history
     var recentSearchHistory = []
     function searchFunction(data) {
@@ -25,13 +32,13 @@ function renderHistory() {
         $("#search").val('');
     $("#search-history").val('');
     }
+
         // if any history objects are disabled, do not delete them
     console.log (renderHistory);
     // load the history onto the page using a foreach
 
-    
     // created a variable for search history and added an area to append the history
-    var searchHistroy = document.createElement ('p');
+    var searchHistory = document.createElement ('p');
     searchHistroy.classList.add ('card-body');
     searchHistroy.append(renderHistory);
 }
@@ -39,6 +46,7 @@ function renderHistory() {
 // this function loads the history from localstorage from the localStorageKey and parses it from json
 function loadHistory() {
     // load the history from localstorage
+
     // parse the history from json
     // if the data we parsed is null, do not set the historyCache to it
 
@@ -121,6 +129,8 @@ function getSearchResults(query) {
     waitUntilFinished();
 }
 
+getSearchResults("Cats");
+
 // this function displays the results we got, formatted into a array
 function displaySearchResults(results) {
     results.forEach(element => {
@@ -174,7 +184,6 @@ function historyButtonClicked(event) {
 
     // getSearchResults(query);
 }
-
 
 // listen for click event on search button then pass to searchClicked
 searchButton.on("click", searchClicked);
