@@ -77,7 +77,10 @@ function createSearchResultObject(Title, Link, Description) {
 
 // This function gets the search results for our query term from the google and wikipidea apis
 function getSearchResults(query) {
-    let searchResults = [];
+    let searchResults = {
+        google: [],
+        wiki:[]
+    };
     let googleFinished = false;
     let wikiFinished = false;
 
@@ -96,7 +99,7 @@ function getSearchResults(query) {
         .then(function(body){
             console.log(body);
             body.items.forEach(element => {
-                searchResults.push(createSearchResultObject(element.title, element.link, element.htmlSnippet));
+                searchResults.google.push(createSearchResultObject(element.title, element.link, element.htmlSnippet));
             });
 
             googleFinished = true;
@@ -111,7 +114,7 @@ function getSearchResults(query) {
         .then(function(body){
             console.log(body);
             for (const index in body[1]) {
-                searchResults.push(createSearchResultObject(body[1][index], body[3][index], body[2][index]));
+                searchResults.wiki.push(createSearchResultObject(body[1][index], body[3][index], body[2][index]));
             }
 
             wikiFinished = true;
@@ -120,8 +123,21 @@ function getSearchResults(query) {
         // This waits until both requests are finished
         function waitUntilFinished() {
             if (googleFinished && wikiFinished) {
-                console.log(searchResults)
-                displaySearchResults(searchResults);
+                let finalresults = [];
+                
+                while (searchResults.google.length > 0 && searchResults.wiki.length > 0) {
+                    if (searchResults.google[0]) {
+                        finalresults.push(searchResults.google[0]);
+                        searchResults.google.splice(0, 1);
+                    }
+                    if (searchResults.wiki[0]) {
+                        finalresults.push(searchResults.wiki[0]);
+                        searchResults.wiki.splice(0, 1);
+                    }
+                }
+
+                console.log(finalresults);
+                displaySearchResults(finalresults);
             } else {
                 window.setTimeout(waitUntilFinished, 100);
             }
@@ -150,10 +166,6 @@ function displaySearchResults(results) {
 
         resultsList.append(object);
     })
-    // loop through all results
-        // create object for displaying
-        // edit values needed for it
-        // append to search list
 }
 
 //// Button Handlers ////
