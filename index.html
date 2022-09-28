@@ -17,9 +17,16 @@
 </header>
 <body>
     <main>
+        <section class="search-history">
+            <select>
+            <option value="" disabled selected=>Select</option>
+        </select>
+        </section>
+
+
         <section class="search-container">
             <div id="search">
-                <h2></h2>
+                <!-- <h2></h2> -->
                 <input type="text" placeholder="Search">
             <button id="btn">submit</button>
             
@@ -36,12 +43,13 @@
         </section>
         
         <section class="results-container">
+            <h3 class="hide">Results : <span id="recent-search"></span></h3>
             <ul id="results-list">
             </ul>
         </section>
     </main>
 </body>
 <footer>
-    
+    placeholder
 </footer>
 </html>
