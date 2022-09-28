@@ -16,24 +16,24 @@
         6.Footer -->
 </head>
 <header>
-    <h1>Search Google and Wikepedia</h1>
+    <h1 class="title is-1">Search Google and Wikepedia</h1>
 </header>
 <body>
     <main>
-        <section class="search-history">
+        <section class="search-history dropdown is-active">
             <select>
             <option value="" disabled selected=>Select</option>
         </select>
         </section>
 
 
-        <section class="search-container">
-            <div id="search">
+        <section class="search-container container is-max-desktop">
+            <div id="search" class="notification is-primary">
                 <!-- <h2></h2> -->
-                <input type="text" placeholder="Search">
-            <button id="btn">submit</button>
+                <input id="search-input" type="text" placeholder="Search">
+            <button id="btn" class="button is-link">submit</button>
             
-            <h3 class="drop-down">Select Format</h3>
+            <h3 class="drop-down dropdown is-active">Select Format</h3>
             <select>
                 <option value=""disabled selected="selected">Select a Format </option>
                 <option value="websites">Websites</option>
