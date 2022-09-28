@@ -14,8 +14,12 @@ let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4'
 function renderHistory() {
     // clear current history
         // if any history objects are disabled, do not delete them
-
+    console.log (renderHistory);
     // load the history onto the page using a foreach
+    // created a variable for search history and added an area to append the history
+    var searchHistroy = document.createElement ('p');
+    searchHistroy.classList.add ('card-body');
+    searchHistroy.append(renderHistory);
 }
 
 // this function loads the history from localstorage from the localStorageKey and parses it from json
@@ -141,6 +145,7 @@ function resultsButtonClicked(event) {
 
     // set location to data-ref
 }
+
 
 // listen for click event on search button then pass to searchClicked
 

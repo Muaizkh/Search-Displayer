@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Displayer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./assets/css/reset.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
     <!--1. Create header to hold title of landing page
         2. Setup same level container for User Search & Search button/selector for formats
         3.Create container for all results containers that are held in it
@@ -17,18 +20,33 @@
 </header>
 <body>
     <main>
+        <section class="search-history">
+            <select>
+            <option value="" disabled selected=>Select</option>
+        </select>
+        </section>
+
+
         <section class="search-container">
             <div id="search">
-                <h2>Search</h2>
+                <!-- <h2></h2> -->
+                <input type="text" placeholder="Search">
             <button id="btn">submit</button>
+            
             <h3 class="drop-down">Select Format</h3>
             <select>
-                <option ()>
-                </option>
+                <option value=""disabled selected="selected">Select a Format </option>
+                <option value="websites">Websites</option>
+                <option value="newspapers">Newspapers</option>
+                <option value="images">Images</option>
+                <option value="articles">Articles</option>
+                <option value="manuscripts">Manuscripts</option>
             </select>
             </div>
         </section>
+        
         <section class="results-container">
+            <h3 class="hide">Results : <span id="recent-search"></span></h3>
             <ul id="results-list">
             </ul>
         </section>
@@ -36,6 +54,6 @@
     <script src="./assets/js/script.js"></script>
 </body>
 <footer>
-    
+    placeholder
 </footer>
 </html>
