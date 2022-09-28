@@ -123,6 +123,23 @@ function getSearchResults(query) {
 
 // this function displays the results we got, formatted into a array
 function displaySearchResults(results) {
+    results.forEach(element => {
+        let object = $("<li>");
+        let anchor = $("<a>");
+        let description = $("<p>");
+
+        anchor.text(element.Title);
+        anchor.attr("href", element.Link);
+
+        if (element.Description) {
+            description.text(element.Description);
+        }
+
+        object.append(anchor);
+        object.append(description);
+
+        resultsList.append(object);
+    })
     // loop through all results
         // create object for displaying
         // edit values needed for it
@@ -157,21 +174,9 @@ function historyButtonClicked(event) {
     // getSearchResults(query);
 }
 
-// this brings you to the page the object is attached to
-function resultsButtonClicked(event) {
-    // get target
-
-    // get target.attr("data-ref")
-
-    // set location to data-ref
-}
-
 
 // listen for click event on search button then pass to searchClicked
 searchButton.on("click", searchClicked);
 
 // listen for change event on history buttons then pass to historyButtonClicked
 historySelector.on("change", historyButtonClicked);
-
-// listen for click event on searchResultButtons then pass to resultsButtonClicked
-resultsList.on("click", ".result-link-button", resultsButtonClicked);
