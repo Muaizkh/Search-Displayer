@@ -13,6 +13,8 @@ let wikiAPIURL = "https://en.wikipedia.org/w/api.php?action=opensearch&&origin=*
 
 let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
 
+var userSearch =$('#search-input');
+
 //// History Handling ////
 // This function renders the search history on the page itself
 function renderHistory() {
@@ -132,14 +134,22 @@ function displaySearchResults(results) {
 // This function starts a search based on the term entered into it
 function searchClicked(event) {
     // get target
-
+    event.preventDefault();
+    
+    var searchInput = userSearch.val()
     // get text input by button
-
+    if  (!searchInput || searchInput==='') {
+        console.error('You need a search input value!');
+        return;
+      }
     // getSearchResults(query);
+    getSearchResults(searchInput);
+    console.log(searchInput);
 }
 
 // this button starts a search based on the term inside it
 function historyButtonClicked(event) {
+    event.preventDefault();
     // get target
 
     // get target.value
