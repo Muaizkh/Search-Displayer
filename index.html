@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="./assets/css/reset.css"/>
     <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <!--1. Create header to hold title of landing page
         2. Setup same level container for User Search & Search button/selector for formats
         3.Create container for all results containers that are held in it
@@ -21,9 +22,9 @@
 <body>
     <main>
         <section id="search-history">
-            <select>
-            <option value="" disabled selected=>Select</option>
-        </select>
+             <select id="history-selector">
+                <option class="history-option" value="" disabled selected=>Select</option>
+            </select>
         </section>
 
 
@@ -31,7 +32,7 @@
             <div id="search">
                 <!-- <h2></h2> -->
                 <input type="text" placeholder="Search">
-            <button id="btn" onclick="searchFunction()">submit</button>
+            <button id="btn" onclick="searchFunction()">Search</button>
             </div>
         </section>
         
@@ -41,6 +42,8 @@
             </ul>
         </section>
     </main>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 <footer>
