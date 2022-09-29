@@ -55,7 +55,6 @@ img {
     padding: 0;
     border-radius: 40%;
 }
-
     
 #search {
     background: #0a1b2d;
@@ -75,6 +74,12 @@ img {
     font-size: 20px;
     line-height: 40px;
 }
+
+#search-icon {
+    top: 17px;
+    left: 10px;
+}
+
 .hide {
     display: none;
 }

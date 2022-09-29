@@ -2,7 +2,10 @@
 let historySelector = $("#history-selector");
 let searchButton = $("#search-btn");
 let resultsList = $("#results-list");
-var searchInput = $('#search-input');
+let searchInput = $('#search-input');
+let dialogeGui = $("#dialog-message");
+let userHistory=$('#search-history');
+let searchDiv = $("#search");
 
 
 let historyCache = [];
@@ -15,46 +18,60 @@ let wikiAPIURL = "https://en.wikipedia.org/w/api.php?action=opensearch&&origin=*
 
 let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
 
-var userSearch =$('#search-input');
-var userHistory=$('#search-history');
-
 //// History Handling ////
 // This function renders the search history on the page itself
 // setting up local storage for search history so it has a place to be stored
+
+// clear current history
+var recentHistory = []
+function saveSearchedValue(query) {
+    // recentSearchHistory.push($("search-history").val());
+    // $("#search-input").val('');
+    // $("#search-history").val('');
+    // as local storage we need to 
+    localStorage.setItem("recentHistory",JSON.stringify(query));
+    console.log (query)
+}
+
 function renderHistory() {
-    localStorage.setItem("searchHistory",JSON.stringify(searchHistory));
-    if(!searchHistory) {
-        searchHistory = {
+    userHistory.html("");
+    userHistory = JSON.parse(localStorage.getItem("recentHistory"));
+    if(!userHistory) {
+        userHistory = {
             history:[]
         };
+        localStorage.setItem("userHistory",JSON.stringify(historyCache));
     }
-    // clear current history
-    var recentSearchHistory = []
-    function searchFunction(data) {
-        recentSearchHistory.push($("search-history").val());
-        $("#search").val('');
-    $("#search-history").val('');
-    }
-
+    userHistory.recentHistory.forEach (e=> {
+let userHistoryItem= $("<li>");
+userHistoryItem.text();
+userHistoryItem.attr("class", "search-history-item");
+searchHistoryItem.on("click", function (){
+    renderHistory ();
+})
+var searchHistoryListEl= $("#recentHistory");
+searchHistoryListEl.append(userHistoryItem);
         // if any history objects are disabled, do not delete them
     console.log (renderHistory);
     // load the history onto the page using a foreach
 
+})
     // created a variable for search history and added an area to append the history
     var searchHistory = document.createElement ('p');
     searchHistory.classList.add ('card-body');
     searchHistory.append(renderHistory);
+    renderHistory();
 }
 
 // this function loads the history from localstorage from the localStorageKey and parses it from json
-function loadHistory() {
+// function loadHistory() {
     // load the history from localstorage
 
     // parse the history from json
     // if the data we parsed is null, do not set the historyCache to it
 
-    renderHistory();
-}
+//     renderHistory();
+// }
 
 // if the search history has the same term already, it is moved to the start of the list
 function saveHistory(query) {
@@ -150,6 +167,8 @@ function getSearchResults(query) {
 
 // this function displays the results we got, formatted into a array
 function displaySearchResults(results) {
+    resultsList.empty();
+
     results.forEach(element => {
         let object = $("<li>");
         let anchor = $("<a>");
@@ -170,6 +189,22 @@ function displaySearchResults(results) {
     })
 }
 
+function displayErrorMsg(msg) {
+    dialogeGui.dialog({
+        position: { my: "left top", at: "left bottom", of: searchDiv }
+      });
+    dialogeGui.dialog("open");
+    dialogeGui.children()[0].textContent = msg;
+
+    let timeout = window.setTimeout(function(){
+        dialogeGui.dialog("close");
+    }, 5000);
+
+    dialogeGui.on("dialogclose", function() {
+        clearTimeout(timeout);
+    })
+}
+
 //// Button Handlers ////
 
 // This function starts a search based on the term entered into it
@@ -181,12 +216,13 @@ function searchClicked(event) {
     // get text input by button
     console.log(query)
     if  (!query || query==='') {
-        console.error('You need a search input value!');
+        displayErrorMsg('You need a search input value!');
         return;
       }
      
     // getSearchResults(query);
     getSearchResults(query);
+    saveSearchedValue (query);
     console.log(query);
 }
 
@@ -194,26 +230,20 @@ function searchClicked(event) {
 function historyButtonClicked(event) {
     event.preventDefault();
     // get target
-    var userHistoryEl = userHistory.val()
-    // get target.value
-    if  (!userHistoryEl || userHistoryEl==='') {
-        console.error('You need a search input value!');
-        return;
-      }
+    var userHistoryEl = userHistory.val();
+    
     // getSearchResults(query);
     getSearchResults(userHistoryEl);
 }
 
-// this brings you to the page the object is attached to
-function resultsButtonClicked(event) {
-    event.preventDefault();
-    // get target
-    var resultsEl = resultsList.value
-    // get target.attr("data-ref")
-    // set location to data-ref
-}
 // listen for click event on search button then pass to searchClicked
 searchButton.on("click", searchClicked);
 
 // listen for change event on history buttons then pass to historyButtonClicked
-historySelector.on("change", historyButtonClicked);
+historySelector.on("click", ".history-button",historyButtonClicked);
+
+$(function() {
+    dialogeGui.dialog();
+    dialogeGui.children()[0].textContent = "";
+    dialogeGui.dialog("close");
+});

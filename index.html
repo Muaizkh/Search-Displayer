@@ -7,9 +7,9 @@
     <title>Search Displayer</title>
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="./assets/css/reset.css"/>
     <link rel="stylesheet" href="./assets/css/style.css"/>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <!--1. Create header to hold title of landing page
         2. Setup same level container for User Search & Search button/selector for formats
         3.Create container for all results containers that are held in it
@@ -34,11 +34,13 @@
             <h1 class="title is-2">Search Google and Wikepedia</h1>
             <div id="search" class="input-container control has-icons-left">
                 <input class="input" id="search-input" type="text">
-                <span class="icon is-left is-medium align-items-center">
-                    <i class="fas fa-search fa-2x mt-4 ml-4"></i>
-                  </span>
-                <!-- <img src="./assets/magnifying-glass.svg" alt="magnifying glass icon"/> -->
+                    <div id="search-icon" class="icon is-left is-medium">
+                      <i class="fas fa-search fa-2x"></i>
+                    </div>
                 <button id="search-btn" class="button is-link">Search</button>
+                <div id="dialog-message" title="Error">
+                    <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -49,13 +51,13 @@
         </section>
     </main>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 <!-- <footer class="footer">
     <div class="content has-text-centered">
       <p>
-        <strong>Made</strong> by <a href="https://github.com/Muaizkh">Muaizkh,</a> <a href="https://github.com/CanadianMREh">Jaymen</a> and 
+        <strong>Made</strong> by <a href="https://github.com/Muaizkh">Muaizkh,</a> <a href="https://github.com/CanadianMRE">Jaymen</a> and 
         <a href="https://github.com/puentedg">Gabriella</a>
       </p>
     </div>
