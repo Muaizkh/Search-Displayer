@@ -162,7 +162,7 @@ function displaySearchResults(results) {
         let object = $("<li class='list-result'>");
         let anchor = $("<a class='list-link'>");
         let description = $("<p class='list-description'>");
-
+        
         anchor.text(element.Title);
         anchor.attr("href", element.Link);
 
@@ -174,7 +174,7 @@ function displaySearchResults(results) {
         object.append(description);
 
         resultsList.append(object);
-        // resultsList.classList.replace("hide","show")
+        
     })
 }
 
@@ -208,6 +208,7 @@ function searchClicked(event) {
         displayErrorMsg('You need a search input value!');
         return;
       }
+      
     saveHistory(query)
     getSearchResults(query);
     console.log(query);
