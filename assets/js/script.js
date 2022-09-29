@@ -60,17 +60,18 @@ searchHistoryListEl.append(userHistoryItem);
     var searchHistory = document.createElement ('p');
     searchHistory.classList.add ('card-body');
     searchHistory.append(renderHistory);
+    renderHistory();
 }
 
 // this function loads the history from localstorage from the localStorageKey and parses it from json
-function loadHistory() {
+// function loadHistory() {
     // load the history from localstorage
 
     // parse the history from json
     // if the data we parsed is null, do not set the historyCache to it
 
-    renderHistory();
-}
+//     renderHistory();
+// }
 
 // if the search history has the same term already, it is moved to the start of the list
 function saveHistory(query) {
