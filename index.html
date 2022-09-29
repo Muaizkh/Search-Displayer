@@ -21,25 +21,24 @@
     <h1 class="title is-2 is-flex-direction-column">Search Google and Wikepedia</h1>
 </header>
     <main>
-        <section id="search-history" class="dropdown is-active">
-             <select id="history-selector">
-                <option class="history-option" value="" disabled selected=>Select</option>
-            </select>
-        </section>
-
-  <div class="wrapper">
-
-  </div>  
-
         <section class="search-container hero is-fullheight">
-            <div id="search" class="input-container wrapper">
+            <div id="search-history" class="dropdown is-active">
+                <select id="history-selector">
+                   <option class="history-option" value="" disabled selected=>Select</option>
+               </select>
+           </div>
+            <div id="search" class="input-container panel-block">
                 <!-- <h2></h2> -->
-                <input class="user-search is-flex-grow-1" type="text">
-            <button id="btn" onclick="searchFunction()">Search</button>
-            <img src="./icon2.png" alt="magnifying-glass icon"/>  
-        </div>
+                <!-- <input id="search-input" type="text"> -->
+                <input class="input" id="search-input" type="text">
+                <button id="search-btn" class="button is-link">Search</button>
+                <span class="icon is-right">
+                  <i class="fas fa-search"></i>
+                </span>
+           
+            <!-- <img src="./assets/magnifying-glass.svg" alt="magnifying glass icon"/> -->
+            </div>
         </section>
-        
         <section class="results-container">
             <h3 class="hide">Results : <span id="recent-search"></span></h3>
             <ul id="results-list">

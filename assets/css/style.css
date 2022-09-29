@@ -11,7 +11,11 @@ h1{
     -webkit-text-fill-color: transparent;
     text-align: center;
 }
-#btn {
+.search-container {
+    display: flex;
+    flex-direction: row;
+}
+#search-btn {
     background-color: #0a1b2d;
     color: white;
     border-radius: 40%;
@@ -19,11 +23,20 @@ h1{
     height: 60px;
     font-size: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
+}
+#history-selector {
+    background-color: #0a1b2d;
+    color: white;
+    border-radius: 20%;
+    width: 90px;
+    height: 60px;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: relative;
 }
 img {
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     background-color: #0a1b2d;
     margin: 0;
     padding: 0;
@@ -46,7 +59,7 @@ img {
     align-items: center;
 }
 
-.user-search {
+#search-input {
     border: none;
     background: none;
     outline: none;

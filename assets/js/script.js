@@ -2,6 +2,8 @@
 let historySelector = $("#history-selector");
 let searchButton = $("#search-btn");
 let resultsList = $("#results-list");
+var searchInput = $('#search-input');
+
 
 let historyCache = [];
 let localStorageKey = "google-wiki-search-history";
@@ -18,7 +20,14 @@ var userHistory=$('#search-history');
 
 //// History Handling ////
 // This function renders the search history on the page itself
+// setting up local storage for search history so it has a place to be stored
 function renderHistory() {
+    localStorage.setItem("searchHistory",JSON.stringify(searchHistory));
+    if(!searchHistory) {
+        searchHistory = {
+            history:[]
+        };
+    }
     // clear current history
     var recentSearchHistory = []
     function searchFunction(data) {
@@ -26,11 +35,11 @@ function renderHistory() {
         $("#search").val('');
     $("#search-history").val('');
     }
+
         // if any history objects are disabled, do not delete them
     console.log (renderHistory);
     // load the history onto the page using a foreach
 
-    
     // created a variable for search history and added an area to append the history
     var searchHistory = document.createElement ('p');
     searchHistory.classList.add ('card-body');
@@ -40,6 +49,7 @@ function renderHistory() {
 // this function loads the history from localstorage from the localStorageKey and parses it from json
 function loadHistory() {
     // load the history from localstorage
+
     // parse the history from json
     // if the data we parsed is null, do not set the historyCache to it
 
@@ -70,7 +80,10 @@ function createSearchResultObject(Title, Link, Description) {
 
 // This function gets the search results for our query term from the google and wikipidea apis
 function getSearchResults(query) {
-    let searchResults = [];
+    let searchResults = {
+        google: [],
+        wiki:[]
+    };
     let googleFinished = false;
     let wikiFinished = false;
 
@@ -89,7 +102,7 @@ function getSearchResults(query) {
         .then(function(body){
             console.log(body);
             body.items.forEach(element => {
-                searchResults.push(createSearchResultObject(element.title, element.link, element.htmlSnippet));
+                searchResults.google.push(createSearchResultObject(element.title, element.link, element.htmlSnippet));
             });
 
             googleFinished = true;
@@ -104,7 +117,7 @@ function getSearchResults(query) {
         .then(function(body){
             console.log(body);
             for (const index in body[1]) {
-                searchResults.push(createSearchResultObject(body[1][index], body[3][index], body[2][index]));
+                searchResults.wiki.push(createSearchResultObject(body[1][index], body[3][index], body[2][index]));
             }
 
             wikiFinished = true;
@@ -113,8 +126,21 @@ function getSearchResults(query) {
         // This waits until both requests are finished
         function waitUntilFinished() {
             if (googleFinished && wikiFinished) {
-                console.log(searchResults)
-                displaySearchResults(searchResults);
+                let finalresults = [];
+                
+                while (searchResults.google.length > 0 && searchResults.wiki.length > 0) {
+                    if (searchResults.google[0]) {
+                        finalresults.push(searchResults.google[0]);
+                        searchResults.google.splice(0, 1);
+                    }
+                    if (searchResults.wiki[0]) {
+                        finalresults.push(searchResults.wiki[0]);
+                        searchResults.wiki.splice(0, 1);
+                    }
+                }
+
+                console.log(finalresults);
+                displaySearchResults(finalresults);
             } else {
                 window.setTimeout(waitUntilFinished, 100);
             }
@@ -124,10 +150,23 @@ function getSearchResults(query) {
 
 // this function displays the results we got, formatted into a array
 function displaySearchResults(results) {
-    // loop through all results
-        // create object for displaying
-        // edit values needed for it
-        // append to search list
+    results.forEach(element => {
+        let object = $("<li>");
+        let anchor = $("<a>");
+        let description = $("<p>");
+
+        anchor.text(element.Title);
+        anchor.attr("href", element.Link);
+
+        if (element.Description) {
+            description.text(element.Description);
+        }
+
+        object.append(anchor);
+        object.append(description);
+
+        resultsList.append(object);
+    })
 }
 
 //// Button Handlers ////
@@ -137,15 +176,16 @@ function searchClicked(event) {
     // get target
     event.preventDefault();
     
-    var searchInput = userSearch.val()
+    var query = searchInput.val()
     // get text input by button
-    if  (!searchInput || searchInput==='') {
+    console.log(query)
+    if  (!query || query==='') {
         console.error('You need a search input value!');
         return;
       }
     // getSearchResults(query);
-    getSearchResults(searchInput);
-    console.log(searchInput);
+    getSearchResults(query);
+    console.log(query);
 }
 
 // this button starts a search based on the term inside it
@@ -171,12 +211,8 @@ function resultsButtonClicked(event) {
     resultsEl.setAttribute()
     // set location to data-ref
 }
-
 // listen for click event on search button then pass to searchClicked
 searchButton.on("click", searchClicked);
 
 // listen for change event on history buttons then pass to historyButtonClicked
 historySelector.on("change", historyButtonClicked);
-
-// listen for click event on searchResultButtons then pass to resultsButtonClicked
-resultsList.on("click", ".result-link-button", resultsButtonClicked);
