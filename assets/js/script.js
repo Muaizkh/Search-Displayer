@@ -18,19 +18,24 @@ let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4'
 //// History Handling ////
 // This function renders the search history on the page itself
 // setting up local storage for search history so it has a place to be stored
+
+// clear current history
+var recentSearchHistory = []
+function saveSearchedValue(query) {
+    // recentSearchHistory.push($("search-history").val());
+    // $("#search-input").val('');
+    // $("#search-history").val('');
+    // as local storage we need to 
+    localStorage.setItem("Recent History",JSON.stringify(query));
+    console.log (query)
+}
+
 function renderHistory() {
-    localStorage.setItem("searchHistory",JSON.stringify(searchHistory));
+    localStorage.setItem("recentSearchHistory",JSON.stringify(historyCache));
     if(!searchHistory) {
         searchHistory = {
             history:[]
         };
-    }
-    // clear current history
-    var recentSearchHistory = []
-    function searchFunction(data) {
-        recentSearchHistory.push($("search-history").val());
-        $("#search").val('');
-    $("#search-history").val('');
     }
 
         // if any history objects are disabled, do not delete them
@@ -182,6 +187,7 @@ function searchClicked(event) {
       }
     // getSearchResults(query);
     getSearchResults(query);
+    saveSearchedValue (query);
     console.log(query);
 }
 

@@ -17,22 +17,29 @@
         6.Footer -->
 </head>
 <header>
-    <h1 class="title is-1">Search Google and Wikepedia</h1>
+    <h1>Search Google and Wikepedia</h1>
 </header>
 <body>
     <main>
-        <section id="search-history" class="dropdown is-active">
-             <select id="history-selector">
-                <option class="history-option" value="" disabled selected=>Select</option>
+        <section id="search-history">
+             <select id="history-selector" >
+                <option class="history-option" value="" disabled selected>Select</option>
+                <option class="history-option">drop down option 1
+                <option class="history-option">drop down option 2
+                </option>
+                <option class="history-option">drop down option 3
+                </option>
+                <option class="history-option">drop down option 4
+                </option>
             </select>
         </section>
 
 
-        <section class="search-container container is-max-desktop">
-            <div id="search" class="notification is-primary">
+        <section class="search-container">
+            <div id="search">
                 <!-- <h2></h2> -->
-            <input type="text" id="search-input" placeholder="Search">
-            <button id="search-btn" class="button is-link">Search</button>
+                <input id="search-input" type="text" placeholder="Search">
+            <button id="btn" onclick="searchClicked(event)">Search</button>
             </div>
         </section>
         
