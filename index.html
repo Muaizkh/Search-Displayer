@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Displayer</title>
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/css/reset.css"/>
     <link rel="stylesheet" href="./assets/css/style.css"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
@@ -17,29 +18,31 @@
         6.Footer -->
 </head>
 <body>
-<header>
-    <h1 class="title is-2 is-flex-direction-column">Search Google and Wikepedia</h1>
-</header>
-    <main>
-        <section class="search-container hero is-fullheight">
+    <header>
+        
+    </header>
+    <main class="container">
+    <div class="columns is-vcentered is-multiline is-gapless search-container">
+        <div id="select-btn" class="column is-4">
             <div id="search-history" class="dropdown is-active">
                 <select id="history-selector">
                    <option class="history-option" value="" disabled selected=>Select</option>
                </select>
            </div>
-            <div id="search" class="input-container panel-block">
-                <!-- <h2></h2> -->
-                <!-- <input id="search-input" type="text"> -->
+        </div>
+        <div class="column is-6 is-justify-content-space-evenly">
+            <h1 class="title is-2">Search Google and Wikepedia</h1>
+            <div id="search" class="input-container control has-icons-left">
                 <input class="input" id="search-input" type="text">
+                <span class="icon is-left is-medium align-items-center">
+                    <i class="fas fa-search fa-2x mt-4 ml-4"></i>
+                  </span>
+                <!-- <img src="./assets/magnifying-glass.svg" alt="magnifying glass icon"/> -->
                 <button id="search-btn" class="button is-link">Search</button>
-                <span class="icon is-right">
-                  <i class="fas fa-search"></i>
-                </span>
-           
-            <!-- <img src="./assets/magnifying-glass.svg" alt="magnifying glass icon"/> -->
             </div>
-        </section>
-        <section class="results-container">
+        </div>
+    </div>
+        <section class="results-container ">
             <h3 class="hide">Results : <span id="recent-search"></span></h3>
             <ul id="results-list">
             </ul>
@@ -49,8 +52,12 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
-<footer>
-    placeholder
-</footer>
+<!-- <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Made</strong> by <a href="https://github.com/Muaizkh">Muaizkh,</a> <a href="https://github.com/CanadianMREh">Jaymen</a> and 
+        <a href="https://github.com/puentedg">Gabriella</a>
+      </p>
+    </div>
+  </footer> -->
 </html>
-<!-- class="button is-link" -->

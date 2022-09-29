@@ -166,6 +166,7 @@ function displaySearchResults(results) {
         object.append(description);
 
         resultsList.append(object);
+        // resultsList.classList.replace("hide","show")
     })
 }
 
