@@ -23,28 +23,39 @@ var userHistory=$('#search-history');
 // setting up local storage for search history so it has a place to be stored
 
 // clear current history
-var recentSearchHistory = []
+var recentHistory = []
 function saveSearchedValue(query) {
     // recentSearchHistory.push($("search-history").val());
     // $("#search-input").val('');
     // $("#search-history").val('');
     // as local storage we need to 
-    localStorage.setItem("Recent History",JSON.stringify(query));
+    localStorage.setItem("recentHistory",JSON.stringify(query));
     console.log (query)
 }
 
 function renderHistory() {
-    localStorage.setItem("recentSearchHistory",JSON.stringify(historyCache));
-    if(!searchHistory) {
-        searchHistory = {
+    userHistory.html("");
+    userHistory = JSON.parse(localStorage.getItem("recentHistory"));
+    if(!userHistory) {
+        userHistory = {
             history:[]
         };
+        localStorage.setItem("userHistory",JSON.stringify(historyCache));
     }
-
+    userHistory.recentHistory.forEach (e=> {
+let userHistoryItem= $("<li>");
+userHistoryItem.text();
+userHistoryItem.attr("class", "search-history-item");
+searchHistoryItem.on("click", function (){
+    renderHistory ();
+})
+var searchHistoryListEl= $("#recentHistory");
+searchHistoryListEl.append(userHistoryItem);
         // if any history objects are disabled, do not delete them
     console.log (renderHistory);
     // load the history onto the page using a foreach
 
+})
     // created a variable for search history and added an area to append the history
     var searchHistory = document.createElement ('p');
     searchHistory.classList.add ('card-body');
