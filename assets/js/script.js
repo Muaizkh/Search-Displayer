@@ -13,7 +13,10 @@ let googleCXKey = "630c7fb54684c4849";
 let googleAPIURL = "https://www.googleapis.com/customsearch/v1?cx="+googleCXKey+"&";
 let wikiAPIURL = "https://en.wikipedia.org/w/api.php?action=opensearch&&origin=*&";
 
-let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4'
+let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
+
+var userSearch =$('#search-input');
+var userHistory=$('#search-history');
 
 //// History Handling ////
 // This function renders the search history on the page itself
@@ -39,8 +42,8 @@ function renderHistory() {
 
     // created a variable for search history and added an area to append the history
     var searchHistory = document.createElement ('p');
-    searchHistroy.classList.add ('card-body');
-    searchHistroy.append(renderHistory);
+    searchHistory.classList.add ('card-body');
+    searchHistory.append(renderHistory);
 }
 
 // this function loads the history from localstorage from the localStorageKey and parses it from json
@@ -163,6 +166,7 @@ function displaySearchResults(results) {
         object.append(description);
 
         resultsList.append(object);
+        // resultsList.classList.replace("hide","show")
     })
 }
 
@@ -189,12 +193,25 @@ function searchClicked(event) {
 function historyButtonClicked(event) {
     event.preventDefault();
     // get target
-
+    var userHistoryEl = userHistory.val()
     // get target.value
-
+    if  (!userHistoryEl || userHistoryEl==='') {
+        console.error('You need a search input value!');
+        return;
+      }
     // getSearchResults(query);
+    getSearchResults(userHistoryEl);
 }
 
+// this brings you to the page the object is attached to
+function resultsButtonClicked(event) {
+    event.preventDefault();
+    // get target
+    var resultsEl = resultsList.value
+    // get target.attr("data-ref")
+    resultsEl.setAttribute()
+    // set location to data-ref
+}
 // listen for click event on search button then pass to searchClicked
 searchButton.on("click", searchClicked);
 
