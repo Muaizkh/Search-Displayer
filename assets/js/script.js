@@ -27,7 +27,7 @@ function renderHistory() {
     // load the history onto the page using a foreach
     historySelector.empty();
     historyCache.forEach (element => {
-        let userHistoryItem= $("<option>");
+        let userHistoryItem= $("<button>");
         userHistoryItem.text();
         userHistoryItem.attr("class", "search-history-item");
         userHistoryItem.text(element);
@@ -218,7 +218,7 @@ function searchClicked(event) {
 function historyButtonClicked(event) {
     event.preventDefault();
     
-    var userHistoryEl = event.value;
+    var userHistoryEl = $(event.target).text();
     saveHistory(userHistoryEl);
     // getSearchResults(query);
     getSearchResults(userHistoryEl);
@@ -228,7 +228,7 @@ function historyButtonClicked(event) {
 searchButton.on("click", searchClicked);
 
 // listen for change event on history buttons then pass to historyButtonClicked
-historySelector.on("change", historyButtonClicked);
+historySelector.on("click", ".search-history-item",historyButtonClicked);
 
 $(function() {
     dialogeGui.dialog();
