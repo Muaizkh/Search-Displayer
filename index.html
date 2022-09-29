@@ -16,10 +16,10 @@
         5.Create container for actual results up to 10 (scroll down format with 3-4 showing on first page)
         6.Footer -->
 </head>
-<header>
-    <h1 class="title is-1">Search Google and Wikepedia</h1>
-</header>
 <body>
+<header>
+    <h1 class="title is-2 is-flex-direction-column">Search Google and Wikepedia</h1>
+</header>
     <main>
         <section id="search-history" class="dropdown is-active">
              <select id="history-selector">
@@ -27,13 +27,17 @@
             </select>
         </section>
 
+  <div class="wrapper">
 
-        <section class="search-container container is-max-desktop">
-            <div id="search" class="notification is-primary">
+  </div>  
+
+        <section class="search-container hero is-fullheight">
+            <div id="search" class="input-container wrapper">
                 <!-- <h2></h2> -->
-                <input type="text" placeholder="Search">
-            <button id="btn" class="button is-link" onclick="searchFunction()">Search</button>
-            </div>
+                <input class="user-search is-flex-grow-1" type="text">
+            <button id="btn" onclick="searchFunction()">Search</button>
+            <img src="./icon2.png" alt="magnifying-glass icon"/>  
+        </div>
         </section>
         
         <section class="results-container">
@@ -50,3 +54,4 @@
     placeholder
 </footer>
 </html>
+<!-- class="button is-link" -->
