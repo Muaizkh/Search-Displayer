@@ -233,7 +233,7 @@ function historyButtonClicked(event) {
     event.preventDefault();
     // get target
     var userHistoryEl = userHistory.val();
-    
+    saveHistory(userHistoryEl);
     // getSearchResults(query);
     getSearchResults(userHistoryEl);
 }
