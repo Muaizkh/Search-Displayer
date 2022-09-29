@@ -41,7 +41,6 @@ function renderHistory() {
         recentHistory = {
             history:[]
         };
-        renderHistory();
     }
     userHistory.recentHistory.forEach (e=> {
 let userHistoryItem= $("<li>");
@@ -60,7 +59,7 @@ searchHistoryListEl.append(userHistoryItem);
     var searchHistory = document.createElement ('p');
     searchHistory.classList.add ('card-body');
     searchHistory.append(renderHistory);
-    renderHistory();
+
 }
 
 // this function loads the history from localstorage from the localStorageKey and parses it from json
@@ -72,7 +71,7 @@ if (history !== null) {
 }
     // parse the history from json
     // if the data we parsed is null, do not set the historyCache to it
-    renderHistory();
+   
 }
 
 // if the search history has the same term already, it is moved to the start of the list
@@ -94,7 +93,7 @@ historyCache.unshift(query);
     // stringify the historycache and save it to localstorage in the localStorageKey
     localStorage.setItem("recentHistory", JSON.stringify(historyCache));
 }
-
+renderHistory();
 
 //// Search result handling ////
 function createSearchResultObject(Title, Link, Description) {
