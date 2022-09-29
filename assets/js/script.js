@@ -22,78 +22,58 @@ let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
 // This function renders the search history on the page itself
 // setting up local storage for search history so it has a place to be stored
 
-// clear current history
-var recentHistory = []
-function saveSearchedValue(query) {
-    // recentSearchHistory.push($("search-history").val());
-    // $("#search-input").val('');
-    // $("#search-history").val('');
-    // as local storage we need to 
-    localStorage.setItem("recentHistory",JSON.stringify(query));
-    console.log (query)
-    
-}
-
 function renderHistory() {
-    recentHistory.html("");
-    recentHistory = JSON.parse(localStorage.getItem("recentHistory"));
-    if(!recentHistory) {
-        recentHistory = {
-            history:[]
-        };
-    }
-    userHistory.recentHistory.forEach (e=> {
-let userHistoryItem= $("<li>");
-userHistoryItem.text();
-userHistoryItem.attr("class", "search-history-item");
-    renderHistory ();
-
-var searchHistoryListEl= $("#recentHistory");
-searchHistoryListEl.append(userHistoryItem);
-        // if any history objects are disabled, do not delete them
-    console.log (renderHistory);
+    // if any history objects are disabled, do not delete them
     // load the history onto the page using a foreach
+historySelector.empty();
+    historyCache.forEach (element => {
+        let userHistoryItem= $("<option>");
+        userHistoryItem.text();
+        userHistoryItem.attr("class", "search-history-item");
+        userHistoryItem.text(element);
+        userHistoryItem.val(element);
 
-})
+        historySelector.append(userHistoryItem);
+    })
     // created a variable for search history and added an area to append the history
-    var searchHistory = document.createElement ('p');
-    searchHistory.classList.add ('card-body');
-    searchHistory.append(renderHistory);
-
 }
 
 // this function loads the history from localstorage from the localStorageKey and parses it from json
 function loadHistory() {
-    // load the history from localstorage
-let history = JSON.parse(localStorage.getItem("userHistory"));
-if (history !== null) {
-    historyCache = history;
-}
-    // parse the history from json
-    // if the data we parsed is null, do not set the historyCache to it
+    let history = JSON.parse(localStorage.getItem(localStorageKey));
+    if (history !== null) {
+        historyCache = history;
+    }
+
+    console.log(historyCache)
    
+    renderHistory();
 }
 
 // if the search history has the same term already, it is moved to the start of the list
 function saveHistory(query) {
-    for (const index in historyCache)
-    // check if query is null or "", if it is etiher, return;
-if (query == null || query == "") {
-console.log ("variable is null or undefined");
-} else {
-    console.log("variable has a value");
-}
     // check the historyCache for any terms which are === to the query
-        // If a element is === to query, splice it from the array
-if (historyCache === query) {
-    historyCache.splice(index, 1);
-}
+    // If a element is === to query, splice it from the array
+    for (const index in historyCache) {
+        if (historyCache[index] === query) {
+            historyCache.splice(index, 1);
+        }
+    }
+    // check if query is null or "", if it is etiher, return;
+    if (query == null || query == "") {
+        console.log ("variable is null or undefined");
+        return;
+    }
     // insert the query at the beginning of the historycache
-historyCache.unshift(query);
+    historyCache.unshift(query);
     // stringify the historycache and save it to localstorage in the localStorageKey
-    localStorage.setItem("recentHistory", JSON.stringify(historyCache));
+    localStorage.setItem(localStorageKey, JSON.stringify(historyCache));
+
+    console.log(historyCache)
+    console.log(query)
+    renderHistory();
 }
-renderHistory();
+loadHistory();
 
 //// Search result handling ////
 function createSearchResultObject(Title, Link, Description) {
@@ -179,10 +159,10 @@ function displaySearchResults(results) {
     resultsList.empty();
 
     results.forEach(element => {
-        let object = $("<li>");
-        let anchor = $("<a>");
-        let description = $("<p>");
-
+        let object = $("<li class='list-result'>");
+        let anchor = $("<a class='list-link'>");
+        let description = $("<p class='list-description'>");
+        
         anchor.text(element.Title);
         anchor.attr("href", element.Link);
 
@@ -194,7 +174,7 @@ function displaySearchResults(results) {
         object.append(description);
 
         resultsList.append(object);
-        // resultsList.classList.replace("hide","show")
+        
     })
 }
 
@@ -228,18 +208,18 @@ function searchClicked(event) {
         displayErrorMsg('You need a search input value!');
         return;
       }
-    // getSearchResults(query);
+      
+    saveHistory(query)
     getSearchResults(query);
-    saveSearchedValue (query);
     console.log(query);
 }
 
 // this button starts a search based on the term inside it
 function historyButtonClicked(event) {
     event.preventDefault();
-    // get target
-    var userHistoryEl = userHistory.val();
     
+    var userHistoryEl = event.value;
+    saveHistory(userHistoryEl);
     // getSearchResults(query);
     getSearchResults(userHistoryEl);
 }
@@ -248,7 +228,7 @@ function historyButtonClicked(event) {
 searchButton.on("click", searchClicked);
 
 // listen for change event on history buttons then pass to historyButtonClicked
-historySelector.on("click", ".history-button",historyButtonClicked);
+historySelector.on("change", historyButtonClicked);
 
 $(function() {
     dialogeGui.dialog();
