@@ -170,9 +170,9 @@ function displaySearchResults(results) {
     resultsList.empty();
 
     results.forEach(element => {
-        let object = $("<li>");
-        let anchor = $("<a>");
-        let description = $("<p>");
+        let object = $("<li class='list-result'>");
+        let anchor = $("<a class='list-link'>");
+        let description = $("<p class='list-description'>");
 
         anchor.text(element.Title);
         anchor.attr("href", element.Link);
