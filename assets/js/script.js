@@ -22,69 +22,58 @@ let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
 // This function renders the search history on the page itself
 // setting up local storage for search history so it has a place to be stored
 
-// clear current history
-var recentHistory = []
-function saveSearchedValue(query) {
-    // recentSearchHistory.push($("search-history").val());
-    // $("#search-input").val('');
-    // $("#search-history").val('');
-    // as local storage we need to 
-    localStorage.setItem("recentHistory",JSON.stringify(query));
-    console.log (query)
-}
-
 function renderHistory() {
-    userHistory.html("");
-    userHistory = JSON.parse(localStorage.getItem("recentHistory"));
-    if(!userHistory) {
-        userHistory = {
-            history:[]
-        };
-        localStorage.setItem("userHistory",JSON.stringify(historyCache));
-    }
-    userHistory.recentHistory.forEach (e=> {
-let userHistoryItem= $("<li>");
-userHistoryItem.text();
-userHistoryItem.attr("class", "search-history-item");
-searchHistoryItem.on("click", function (){
-    renderHistory ();
-})
-var searchHistoryListEl= $("#recentHistory");
-searchHistoryListEl.append(userHistoryItem);
-        // if any history objects are disabled, do not delete them
-    console.log (renderHistory);
+    // if any history objects are disabled, do not delete them
     // load the history onto the page using a foreach
 
-})
+    historyCache.forEach (element => {
+        let userHistoryItem= $("<option>");
+        userHistoryItem.text();
+        userHistoryItem.attr("class", "search-history-item");
+        userHistoryItem.text(element);
+        userHistoryItem.val(element);
+
+        historySelector.append(userHistoryItem);
+    })
     // created a variable for search history and added an area to append the history
-    var searchHistory = document.createElement ('p');
-    searchHistory.classList.add ('card-body');
-    searchHistory.append(renderHistory);
-    renderHistory();
 }
 
 // this function loads the history from localstorage from the localStorageKey and parses it from json
-// function loadHistory() {
-    // load the history from localstorage
+function loadHistory() {
+    let history = JSON.parse(localStorage.getItem(localStorageKey));
+    if (history !== null) {
+        historyCache = history;
+    }
 
-    // parse the history from json
-    // if the data we parsed is null, do not set the historyCache to it
-
-//     renderHistory();
-// }
+    console.log(historyCache)
+   
+    renderHistory();
+}
 
 // if the search history has the same term already, it is moved to the start of the list
 function saveHistory(query) {
-    // check if query is null or "", if it is etiher, return;
-
     // check the historyCache for any terms which are === to the query
-        // If a element is === to query, splice it from the array
-
+    // If a element is === to query, splice it from the array
+    for (const index in historyCache) {
+        if (historyCache[index] === query) {
+            historyCache.splice(index, 1);
+        }
+    }
+    // check if query is null or "", if it is etiher, return;
+    if (query == null || query == "") {
+        console.log ("variable is null or undefined");
+        return;
+    }
     // insert the query at the beginning of the historycache
-
+    historyCache.unshift(query);
     // stringify the historycache and save it to localstorage in the localStorageKey
-}
+    localStorage.setItem(localStorageKey, JSON.stringify(historyCache));
 
+    console.log(historyCache)
+    console.log(query)
+    renderHistory();
+}
+loadHistory();
 
 //// Search result handling ////
 function createSearchResultObject(Title, Link, Description) {
@@ -219,10 +208,9 @@ function searchClicked(event) {
         displayErrorMsg('You need a search input value!');
         return;
       }
-     
-    // getSearchResults(query);
+      
+    saveHistory(query)
     getSearchResults(query);
-    saveSearchedValue (query);
     console.log(query);
 }
 
@@ -231,7 +219,7 @@ function historyButtonClicked(event) {
     event.preventDefault();
     // get target
     var userHistoryEl = userHistory.val();
-    
+    saveHistory(userHistoryEl);
     // getSearchResults(query);
     getSearchResults(userHistoryEl);
 }
