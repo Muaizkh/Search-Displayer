@@ -47,9 +47,8 @@ function renderHistory() {
 let userHistoryItem= $("<li>");
 userHistoryItem.text();
 userHistoryItem.attr("class", "search-history-item");
-searchHistoryItem.on("click", function (){
     renderHistory ();
-})
+
 var searchHistoryListEl= $("#recentHistory");
 searchHistoryListEl.append(userHistoryItem);
         // if any history objects are disabled, do not delete them
@@ -78,14 +77,22 @@ if (history !== null) {
 
 // if the search history has the same term already, it is moved to the start of the list
 function saveHistory(query) {
+    for (const index in historyCache)
     // check if query is null or "", if it is etiher, return;
-
+if (query == null || query == "") {
+console.log ("variable is null or undefined");
+} else {
+    console.log("variable has a value");
+}
     // check the historyCache for any terms which are === to the query
         // If a element is === to query, splice it from the array
-
+if (historyCache === query) {
+    historyCache.splice(index, 1);
+}
     // insert the query at the beginning of the historycache
-
+historyCache.unshift(query);
     // stringify the historycache and save it to localstorage in the localStorageKey
+    localStorage.setItem("recentHistory", JSON.stringify(historyCache));
 }
 
 
