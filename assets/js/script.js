@@ -216,8 +216,8 @@ function searchClicked(event) {
 // this button starts a search based on the term inside it
 function historyButtonClicked(event) {
     event.preventDefault();
-    // get target
-    var userHistoryEl = userHistory.val();
+    
+    var userHistoryEl = event.value;
     saveHistory(userHistoryEl);
     // getSearchResults(query);
     getSearchResults(userHistoryEl);
@@ -227,7 +227,7 @@ function historyButtonClicked(event) {
 searchButton.on("click", searchClicked);
 
 // listen for change event on history buttons then pass to historyButtonClicked
-historySelector.on("click", ".history-button",historyButtonClicked);
+historySelector.on("change", historyButtonClicked);
 
 $(function() {
     dialogeGui.dialog();
