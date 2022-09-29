@@ -31,16 +31,17 @@ function saveSearchedValue(query) {
     // as local storage we need to 
     localStorage.setItem("recentHistory",JSON.stringify(query));
     console.log (query)
+    
 }
 
 function renderHistory() {
-    userHistory.html("");
-    userHistory = JSON.parse(localStorage.getItem("recentHistory"));
-    if(!userHistory) {
-        userHistory = {
+    recentHistory.html("");
+    recentHistory = JSON.parse(localStorage.getItem("recentHistory"));
+    if(!recentHistory) {
+        recentHistory = {
             history:[]
         };
-        localStorage.setItem("userHistory",JSON.stringify(historyCache));
+        renderHistory();
     }
     userHistory.recentHistory.forEach (e=> {
 let userHistoryItem= $("<li>");
@@ -64,14 +65,16 @@ searchHistoryListEl.append(userHistoryItem);
 }
 
 // this function loads the history from localstorage from the localStorageKey and parses it from json
-// function loadHistory() {
+function loadHistory() {
     // load the history from localstorage
-
+let history = JSON.parse(localStorage.getItem("userHistory"));
+if (history !== null) {
+    historyCache = history;
+}
     // parse the history from json
     // if the data we parsed is null, do not set the historyCache to it
-
-//     renderHistory();
-// }
+    renderHistory();
+}
 
 // if the search history has the same term already, it is moved to the start of the list
 function saveHistory(query) {
