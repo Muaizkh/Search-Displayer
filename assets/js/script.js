@@ -2,7 +2,10 @@
 let historySelector = $("#history-selector");
 let searchButton = $("#search-btn");
 let resultsList = $("#results-list");
-var searchInput = $('#search-input');
+let searchInput = $('#search-input');
+let dialogeGui = $("#dialog-message");
+let userHistory=$('#search-history');
+let searchDiv = $("#search");
 
 
 let historyCache = [];
@@ -14,9 +17,6 @@ let googleAPIURL = "https://www.googleapis.com/customsearch/v1?cx="+googleCXKey+
 let wikiAPIURL = "https://en.wikipedia.org/w/api.php?action=opensearch&&origin=*&";
 
 let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
-
-var userSearch =$('#search-input');
-var userHistory=$('#search-history');
 
 //// History Handling ////
 // This function renders the search history on the page itself
@@ -155,6 +155,8 @@ function getSearchResults(query) {
 
 // this function displays the results we got, formatted into a array
 function displaySearchResults(results) {
+    resultsList.empty();
+
     results.forEach(element => {
         let object = $("<li>");
         let anchor = $("<a>");
@@ -175,6 +177,22 @@ function displaySearchResults(results) {
     })
 }
 
+function displayErrorMsg(msg) {
+    dialogeGui.dialog({
+        position: { my: "left top", at: "left bottom", of: searchDiv }
+      });
+    dialogeGui.dialog("open");
+    dialogeGui.children()[0].textContent = msg;
+
+    let timeout = window.setTimeout(function(){
+        dialogeGui.dialog("close");
+    }, 5000);
+
+    dialogeGui.on("dialogclose", function() {
+        clearTimeout(timeout);
+    })
+}
+
 //// Button Handlers ////
 
 // This function starts a search based on the term entered into it
@@ -186,7 +204,7 @@ function searchClicked(event) {
     // get text input by button
     console.log(query)
     if  (!query || query==='') {
-        console.error('You need a search input value!');
+        displayErrorMsg('You need a search input value!');
         return;
       }
     // getSearchResults(query);
@@ -199,27 +217,20 @@ function searchClicked(event) {
 function historyButtonClicked(event) {
     event.preventDefault();
     // get target
-    var userHistoryEl = userHistory.val()
-    // get target.value
-    if  (!userHistoryEl || userHistoryEl==='') {
-        console.error('You need a search input value!');
-        return;
-      }
+    var userHistoryEl = userHistory.val();
+    
     // getSearchResults(query);
     getSearchResults(userHistoryEl);
 }
 
-// this brings you to the page the object is attached to
-function resultsButtonClicked(event) {
-    event.preventDefault();
-    // get target
-    var resultsEl = resultsList.value
-    // get target.attr("data-ref")
-    resultsEl.setAttribute()
-    // set location to data-ref
-}
 // listen for click event on search button then pass to searchClicked
 searchButton.on("click", searchClicked);
 
 // listen for change event on history buttons then pass to historyButtonClicked
-historySelector.on("change", historyButtonClicked);
+historySelector.on("click", ".history-button",historyButtonClicked);
+
+$(function() {
+    dialogeGui.dialog();
+    dialogeGui.children()[0].textContent = "";
+    dialogeGui.dialog("close");
+});
