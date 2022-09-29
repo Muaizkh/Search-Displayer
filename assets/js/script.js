@@ -25,7 +25,7 @@ let googleAPIKey = 'AIzaSyC8JZlJOM7ykwAq_PhFWgr8vAiti0UHay4';
 function renderHistory() {
     // if any history objects are disabled, do not delete them
     // load the history onto the page using a foreach
-
+    historySelector.empty();
     historyCache.forEach (element => {
         let userHistoryItem= $("<option>");
         userHistoryItem.text();
