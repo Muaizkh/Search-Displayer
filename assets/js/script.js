@@ -166,7 +166,7 @@ function displaySearchResults(results) {
         object.append(description);
 
         resultsList.append(object);
-        // resultsList.classList.replace("hide","show")
+        
     })
 }
 
@@ -184,6 +184,7 @@ function searchClicked(event) {
         console.error('You need a search input value!');
         return;
       }
+     
     // getSearchResults(query);
     getSearchResults(query);
     console.log(query);
@@ -209,7 +210,6 @@ function resultsButtonClicked(event) {
     // get target
     var resultsEl = resultsList.value
     // get target.attr("data-ref")
-    resultsEl.setAttribute()
     // set location to data-ref
 }
 // listen for click event on search button then pass to searchClicked
