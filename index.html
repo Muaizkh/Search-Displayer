@@ -23,9 +23,9 @@
     </header>
     <main class="container">
     <div class="columns is-vcentered is-multiline is-gapless search-container">
-        <div id="select-btn" class="column is-4">
-            <div id="search-history" class="dropdown is-active">
-                <ul id="history-selector">
+        <div id="select-btn" class="column is-4 is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+            <div id="search-history">
+                <ul id="history-selector" class="is-large is-rounded is-flex is-flex-direction-column">
                     <button class="history-option"></button>
                 </ul>
 
@@ -36,14 +36,14 @@
                </select> -->
            </div>
         </div>
-        <div class="column is-6 is-justify-content-space-evenly">
-            <h1 class="title is-2">Search Google and Wikepedia</h1>
-            <div id="search" class="input-container control has-icons-left">
-                <input class="input" id="search-input" type="text">
+        <div class="column is-6 is-justify-content-center is-align-text-center">
+            <h1 class="title is-1">Wiki & Google Lookup</h1>
+            <div id="search" class="input-container is-flex  control is-align-items-center is-justify-content-space-between has-icons-left">
+                <input class="input is-size-4 has-text-white" id="search-input" type="text">
                     <div id="search-icon" class="icon is-left is-medium">
                       <i class="fas fa-search fa-2x"></i>
                     </div>
-                <button id="search-btn" class="button is-link">Search</button>
+                <button id="search-btn" class="button is-link is-rounded has-text-weight-bold is-size-4">Search</button>
                 <div id="dialog-message" title="Error">
                     <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
                 </div>
