@@ -178,6 +178,7 @@ function displaySearchResults(results) {
     })
 }
 
+// This function displays a error message below the search bar
 function displayErrorMsg(msg) {
     dialogeGui.dialog({
         position: { my: "left top", at: "left bottom", of: searchDiv }
