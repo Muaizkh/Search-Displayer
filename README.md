@@ -13,7 +13,8 @@ Type in landing page and hit enter
 Open page and type into search bar what you wish to research
 Click any links that show up to allow yourself to fully access the pages that were displayed
 
-```md
+
+```
 ![ss of landing page](assets/images/page1.png)
 ```
 
