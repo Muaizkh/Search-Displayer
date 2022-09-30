@@ -17,7 +17,7 @@ body {
 
 
 h1{
-    background: -webkit-linear-gradient( #5f9de0,  var(--dark));
+    background: -webkit-linear-gradient( #3b84d3,  var(--dark));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -51,6 +51,17 @@ h1{
     margin-left: 20px;
     color:#666768;
 }
+/* Search history items inside the button */
+.search-history-item {
+    background-color: var(--dark);
+    height: 50px;
+    width: 130px;
+    color: white;
+    margin-top: 15px;
+    font-size: 20px;
+    border-radius: 40px;
+}
+
  /* Class to hide result on the first page */
 .hide {
     display: none;
@@ -73,17 +84,12 @@ h1{
     height: 70px;
     width: 600px;
     border-radius:40px;
-    display:flex;
-    justify-content: space-between;
-     align-items: center;
 }
 /* Users input on the search bar */
 #search-input {
     border: none;
     background: none;
     outline: none;
-    color:white;
-    font-size: 20px;
     line-height: 40px;
 }
 /* Bulma magnifying glass icon repositioning */
@@ -94,35 +100,17 @@ h1{
 /* Search button on the search bar */
 #search-btn {
     background-color: var(--dark);
-    color: white;
-    border-radius: 50%;
     width: 90px;
     height: 60px;
-    font-size: 24px;
-    font-weight: bolder;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 /* Hovering search button */
 #search-btn:hover {
     background-color: white;
-    color:#0a1b2d
+    color:#0a1b2d;
 }
-/* Render history select button */
-#select-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-/* Select item on history button */
-#history-selector {
-    background-color: var(--dark);
-    color: white;
-    border-radius: 40px;
-    width: 120px;
-    height: 60px;
-    font-size: 20px;
-    font-weight: bolder;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
+
+
+
 
 
