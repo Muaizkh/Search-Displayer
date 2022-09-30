@@ -14,17 +14,23 @@ Open page and type into search bar what you wish to research
 Click any links that show up to allow yourself to fully access the pages that were displayed
 
 
+```md
+![pic](assets/images/page1.png)
 ```
-(assets/images/page1.png)
-```
+To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
 
+    ```md
+    ![alt text](assets/images/screenshot.png)
+    ```
 
 ## Credits
 
 The collaborators of this page are: 
 
 Jaymen Laton: https://github.com/CanadianMRE
+
 Muaiz Khan: https://github.com/Muaizkh
+
 Gabriella Puente: https://github.com/puentedg
 
 Bulma CSS: https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css
