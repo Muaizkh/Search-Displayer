@@ -14,13 +14,9 @@ Open page and type into search bar what you wish to research
 Click any links that show up to allow yourself to fully access the pages that were displayed
 
 ```md
-![ss of landing page](assets/images/s
+![ss of landing page](assets/images/page1.png)
+```
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
 
 ## Credits
 
