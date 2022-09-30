@@ -75,7 +75,7 @@ h1{
 #search {
     background: var(--dark);
     height: 70px;
-    width: 600px;
+    width: 520px;
     border-radius:40px;
 }
 /* Users input on the search bar */
