@@ -36,5 +36,8 @@ Wikipedia API: https://en.wikipedia.org/w/api.php?action=opensearch&&origin=*&
 
 JQuery: https://code.jquery.com/jquery-1.12.4.js, https://code.jquery.com/ui/1.13.2/jquery-ui.js
 
+##License
+
+MIT License
 
 
