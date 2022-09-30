@@ -159,9 +159,9 @@ function displaySearchResults(results) {
     resultsList.empty();
 
     results.forEach(element => {
-        let object = $("<li class='list-result'>");
-        let anchor = $("<a class='list-link'>");
-        let description = $("<p class='list-description'>");
+        let object = $("<li class='list-result has-background-white'>");
+        let anchor = $("<a class='list-link is-size-5 has-text-weight-bold ml-5 mt-3'>");
+        let description = $("<p class='list-description is-size-6 has-text-weight-semibold ml-5'>");
         
         anchor.text(element.Title);
         anchor.attr("href", element.Link);

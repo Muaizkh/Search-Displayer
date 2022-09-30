@@ -14,8 +14,6 @@ body {
     width:100vw;
     background: linear-gradient(#89f6b6, #1bc296);
 }
-
-
 h1{
     background: -webkit-linear-gradient( #3b84d3,  var(--dark));
     -webkit-background-clip: text;
@@ -33,22 +31,17 @@ h1{
 .list-result {
     line-height: 20px;
     color:var(--dark);
-    background-color: rgb(238, 238, 238);
+    /* background-color: rgb(238, 238, 238); */
     width: 95%;
     line-height: 30px;
 }
 /* Link on results list*/
 .list-link {
     color: #12b489;
-    font-size: 20px;
-    font-weight: bolder;
-    margin-left: 20px;
 }
 /* Description for the results, below the link */
 .list-description{
-    font-weight: bold;
     line-height: 20px;
-    margin-left: 20px;
     color:#666768;
 }
 /* Search history items inside the button */
