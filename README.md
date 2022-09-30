@@ -14,6 +14,7 @@ Open page and type into search bar what you wish to research
 Click any links that show up to allow yourself to fully access the pages that were displayed
 
 ![pic](assets/images/page1.png)
+!{pic2}(assets/images/research1.png)
 
 ## Credits
 
