@@ -15,7 +15,7 @@ Click any links that show up to allow yourself to fully access the pages that we
 
 
 ```
-![ss of landing page](assets/images/page1.png)
+(assets/images/page1.png)
 ```
 
 
